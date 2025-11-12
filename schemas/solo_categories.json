@@ -1,0 +1,123 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SMEPro Solo Signup Categories",
+  "description": "Production-ready schema for SMEPro Solo signup criteria, including categories, sub-categories, and specific options with proper hierarchical dependencies.",
+  "type": "object",
+  "properties": {
+    "category": {
+      "type": "string",
+      "enum": [
+        "Entertainment & Creative Arts",
+        "Professional Services",
+        "Entrepreneurship & Startups",
+        "Education & Knowledge Work",
+        "Lifestyle & Independent Professions"
+      ]
+    },
+    "subCategory": { "type": "string" },
+    "specificOption": { "type": "string" }
+  },
+  "required": ["category", "subCategory", "specificOption"],
+  "allOf": [
+    {
+      "if": { "properties": { "category": { "const": "Entertainment & Creative Arts" } } },
+      "then": { "properties": { "subCategory": { "enum": ["Music", "Visual Arts", "Film & Video", "Performing Arts", "Fashion & Design"] } } }
+    },
+    {
+      "if": { "properties": { "subCategory": { "const": "Music" } } },
+      "then": { "properties": { "specificOption": { "enum": ["Songwriting", "Music Production", "Live Performance", "Distribution", "Licensing", "Branding", "Touring"] } } }
+    },
+    {
+      "if": { "properties": { "subCategory": { "const": "Visual Arts" } } },
+      "then": { "properties": { "specificOption": { "enum": ["Painting", "Sculpture", "Digital Art", "Galleries", "NFTs", "Art Sales", "Commissions"] } } }
+    },
+    {
+      "if": { "properties": { "subCategory": { "const": "Film & Video" } } },
+      "then": { "properties": { "specificOption": { "enum": ["Directing", "Screenwriting", "Cinematography", "Editing", "Film Distribution", "Festivals", "Streaming Platforms"] } } }
+    },
+    {
+      "if": { "properties": { "subCategory": { "const": "Performing Arts" } } },
+      "then": { "properties": { "specificOption": { "enum": ["Theater", "Dance", "Comedy", "Acting", "Stage Production", "Event Promotion"] } } }
+    },
+    {
+      "if": { "properties": { "subCategory": { "const": "Fashion & Design" } } },
+      "then": { "properties": { "specificOption": { "enum": ["Apparel Design", "Modeling", "Styling", "Merchandising", "Fashion Shows", "Fashion Branding"] } } }
+    },
+    {
+      "if": { "properties": { "category": { "const": "Professional Services" } } },
+      "then": { "properties": { "subCategory": { "enum": ["Consulting", "Freelance Tech", "Legal & Compliance", "Finance"] } } }
+    },
+    {
+      "if": { "properties": { "subCategory": { "const": "Consulting" } } },
+      "then": { "properties": { "specificOption": { "enum": ["Strategy Consulting", "Operations Consulting", "Finance Consulting", "Marketing Consulting", "Technology Consulting", "Legal Advisory"] } } }
+    },
+    {
+      "if": { "properties": { "subCategory": { "const": "Freelance Tech" } } },
+      "then": { "properties": { "specificOption": { "enum": ["Web Development", "App Development", "AI/ML", "Cybersecurity", "Cloud Services", "Data Analytics"] } } }
+    },
+    {
+      "if": { "properties": { "subCategory": { "const": "Legal & Compliance" } } },
+      "then": { "properties": { "specificOption": { "enum": ["Independent Law Practice", "Contract Drafting", "Intellectual Property", "Mediation"] } } }
+    },
+    {
+      "if": { "properties": { "subCategory": { "const": "Finance" } } },
+      "then": { "properties": { "specificOption": { "enum": ["Accounting", "Tax Advisory", "Investment Advisory", "Personal Finance Coaching"] } } }
+    },
+    {
+      "if": { "properties": { "category": { "const": "Entrepreneurship & Startups" } } },
+      "then": { "properties": { "subCategory": { "enum": ["Startup Founder", "E-commerce Entrepreneur", "Social Enterprise", "Innovation & Tech"] } } }
+    },
+    {
+      "if": { "properties": { "subCategory": { "const": "Startup Founder" } } },
+      "then": { "properties": { "specificOption": { "enum": ["Ideation", "Pitching", "Fundraising", "MVP Development", "Scaling", "Exit Strategy"] } } }
+    },
+    {
+      "if": { "properties": { "subCategory": { "const": "E-commerce Entrepreneur" } } },
+      "then": { "properties": { "specificOption": { "enum": ["Dropshipping", "Online Storefronts", "Digital Marketing", "SEO", "Customer Service"] } } }
+    },
+    {
+      "if": { "properties": { "subCategory": { "const": "Social Enterprise" } } },
+      "then": { "properties": { "specificOption": { "enum": ["Nonprofit Startup", "Community Impact", "Fundraising", "Partnerships", "Advocacy"] } } }
+    },
+    {
+      "if": { "properties": { "subCategory": { "const": "Innovation & Tech" } } },
+      "then": { "properties": { "specificOption": { "enum": ["Product Development", "Patents", "R&D", "Incubators", "Accelerators"] } } }
+    },
+    {
+      "if": { "properties": { "category": { "const": "Education & Knowledge Work" } } },
+      "then": { "properties": { "subCategory": { "enum": ["Tutoring & Coaching", "Content Creation", "Research & Writing"] } } }
+    },
+    {
+      "if": { "properties": { "subCategory": { "const": "Tutoring & Coaching" } } },
+      "then": { "properties": { "specificOption": { "enum": ["Academic Tutoring", "Test Prep", "Career Coaching", "Life Coaching"] } } }
+    },
+    {
+      "if": { "properties": { "subCategory": { "const": "Content Creation" } } },
+      "then": { "properties": { "specificOption": { "enum": ["Blogging", "Podcasting", "YouTube", "Online Courses", "Substack", "Knowledge Products"] } } }
+    },
+    {
+      "if": { "properties": { "subCategory": { "const": "Research & Writing" } } },
+      "then": { "properties": { "specificOption": { "enum": ["Independent Research", "Publishing", "Grant Writing", "Technical Writing"] } } }
+    },
+    {
+      "if": { "properties": { "category": { "const": "Lifestyle & Independent Professions" } } },
+      "then": { "properties": { "subCategory": { "enum": ["Health & Wellness", "Culinary Arts", "Crafts & Trades", "Photography"] } } }
+    },
+    {
+      "if": { "properties": { "subCategory": { "const": "Health & Wellness" } } },
+      "then": { "properties": { "specificOption": { "enum": ["Personal Training", "Yoga Instruction", "Nutrition Coaching", "Therapy", "Holistic Healing"] } } }
+    },
+    {
+      "if": { "properties": { "subCategory": { "const": "Culinary Arts" } } },
+      "then": { "properties": { "specificOption": { "enum": ["Chef", "Baker", "Food Blogger", "Catering", "Food Truck", "Recipe Development"] } } }
+    },
+    {
+      "if": { "properties": { "subCategory": { "const": "Crafts & Trades" } } },
+      "then": { "properties": { "specificOption": { "enum": ["Carpentry", "Metalwork", "Handmade Goods", "Etsy Shops", "Local Artisan Markets"] } } }
+    },
+    {
+      "if": { "properties": { "subCategory": { "const": "Photography" } } },
+      "then": { "properties": { "specificOption": { "enum": ["Portrait Photography", "Commercial Photography", "Event Photography", "Wildlife Photography", "Stock Photography", "Photo Editing"] } } }
+    }
+  ]
+}

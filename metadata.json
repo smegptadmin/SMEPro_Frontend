@@ -1,0 +1,7 @@
+{
+  "name": "SMEPro Lite Backup",
+  "description": "A narrowly trained subject matter expert AI model. Select an industry, sub-type, and operating segment to start a contextual conversation with a specialized AI.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}

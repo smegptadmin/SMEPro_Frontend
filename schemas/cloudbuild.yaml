@@ -1,0 +1,76 @@
+steps:
+# 1. Build backend container
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+    [
+      'build',
+      '-t',
+      'gcr.io/$PROJECT_ID/smepro-backend:$SHORT_SHA',
+      './backend'
+    ]
+
+# 2. Push backend image
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+    [
+      'push',
+      'gcr.io/$PROJECT_ID/smepro-backend:$SHORT_SHA'
+    ]
+
+# 3. Deploy backend to Cloud Run
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args:
+    [
+      'run',
+      'deploy',
+      'smepro-backend',
+      '--image',
+      'gcr.io/$PROJECT_ID/smepro-backend:$SHORT_SHA',
+      '--region',
+      'us-central1',
+      '--platform',
+      'managed',
+      '--allow-unauthenticated',
+      '--set-env-vars',
+      'STRIPE_API_KEY=${_STRIPE_API_KEY},STRIPE_WEBHOOK_SECRET=${_STRIPE_WEBHOOK_SECRET},SMEPRO_DB_PATH=/app/instance/smepro.db'
+    ]
+
+# 4. Health check (DB integrity)
+- name: 'gcr.io/cloud-builders/curl'
+  args:
+    [
+      '-sSf',
+      'https://smepro-backend-<your-service-id>-uc.a.run.app/health/db'
+    ]
+
+# 5. Build frontend (React)
+- name: 'gcr.io/cloud-builders/npm'
+  dir: 'frontend'
+  args: ['run', 'build']
+
+# 6. Upload frontend build to GCS bucket
+- name: 'gcr.io/cloud-builders/gsutil'
+  args:
+    [
+      '-m',
+      'rsync',
+      '-r',
+      'frontend/build',
+      'gs://smepro-frontend-bucket'
+    ]
+
+# 7. Invalidate CDN cache (optional)
+- name: 'gcr.io/cloud-builders/gcloud'
+  args:
+    [
+      'compute',
+      'url-maps',
+      'invalidate-cdn-cache',
+      'smepro-frontend-map',
+      '--path',
+      '/*'
+    ]
+
+images:
+- 'gcr.io/$PROJECT_ID/smepro-backend:$SHORT_SHA'

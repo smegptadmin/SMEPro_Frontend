@@ -1,0 +1,33 @@
+# ---------------------------------------------------------------------------
+# IMPORTANT: This file is for informational purposes ONLY.
+#
+# SMEPro Lite is a modern JavaScript/React web application. In this ecosystem,
+# project dependencies are formally managed by the `package.json` file.
+#
+# To install all necessary software packages, run the following command:
+# > npm install
+#
+# This `requirements.txt` file is provided for a high-level overview,
+# connecting the app's core features to the technologies that power them.
+# ---------------------------------------------------------------------------
+
+## Core Application Framework
+# Powers the user interface, state management, and component structure.
+react
+react-dom
+
+## AI & Machine Learning
+# The primary engine for SMEPro's intelligence. Powers all core features including
+# contextual chat, collaborative SME sessions, Vault analysis, interactive insights,
+# and normalizing data from external sources via the Universal API Connector.
+@google/genai
+
+## Content Rendering
+# Used to display rich, formatted responses from the AI. Renders markdown for
+# elements like code blocks, tables, lists, and interactive checklists.
+marked
+highlight.js
+
+## Styling
+# Provides the modern, responsive design system used throughout the app.
+tailwindcss

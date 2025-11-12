@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SMEPro Vault Categories",
+  "description": "Defines the user-configurable categories for organizing saved knowledge in the SMEPro Vault.",
+  "type": "object",
+  "properties": {
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Strategic Plans",
+          "Research & Data",
+          "Creative Ideas",
+          "Key Contacts",
+          "Procedural Guides",
+          "Meeting Notes",
+          "Uncategorized"
+        ]
+      }
+    }
+  }
+}
